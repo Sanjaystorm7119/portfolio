@@ -6,6 +6,8 @@ export const name = "Sanjay B.";
 
 export const aboutMe = "Let's Build break fix Repeat ...";
 
+export const Learning = "Ai LangChain LangGraph MCP" 
+
 export const education1 = {
   name: "Saveetha Engineering College",
   branch: "B.Tech - Information Technology.",

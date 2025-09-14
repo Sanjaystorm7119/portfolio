@@ -17,7 +17,9 @@ const Hero = () => {
 
         <div className="z-10 md:w-[600px] sm:w-[70%] flex items-center justify-center rounded-lg relative ">
           <TextRevealByWord text={aboutMe} />
+           
         </div>
+        
       </div>
     </div>
   );

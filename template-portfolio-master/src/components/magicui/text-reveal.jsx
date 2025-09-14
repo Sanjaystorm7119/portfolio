@@ -133,30 +133,13 @@ export const TextRevealByWord = ({ text, className }) => {
             </motion.span>
           ))}
         </div>
-        <div className="flex items-center px-5 justify-start">
-          <Modal>
-            <motion.button
-              style={{ opacity: buttonOpacity, x: buttonX }}
-              transition={{ type: "spring", stiffness: 300, damping: 10 }}
-              className=""
-            >
-              <ModalTrigger className="group/modal-btn   cursor-none  p-0">
-                <div className="z-10 flexitems-center justify-center">
-                  <div
-                    className={cn(
-                      "group rounded-full text-base text-white transition-all ease-in border border-zinc-600/70 hover:cursor-pointer  bg-neutral-950 hover:bg-neutral-800"
-                    )}
-                  >
-                    <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-4 transition ease-out hover:[color:var(--color)] hover:duration-300 lg:text-3xl md:text-2xl">
-                      <button>👋 Say hi!</button>
-                      <ArrowRightIcon className="ml-1 size-5 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
-                    </AnimatedShinyText>
-                  </div>
-                </div>
-              </ModalTrigger>
-            </motion.button>
-            <ModalForm />
-          </Modal>
+        <div className="flex w-full justify-center items-center mt-8">
+          <div className="inline-flex items-center px-8 py-4 whitespace-nowrap bg-neutral-950 max-w-[90vw] justify-center">
+            <AnimatedShinyText className="inline-flex items-center justify-center transition ease-out hover:[color:var(--color)] hover:duration-300 lg:text-3xl md:text-2xl">
+              GenAi RAG LangChain LangGraph LangSmith MCP AgenticAi LLM !
+              <ArrowRightIcon className="ml-1 size-5 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+            </AnimatedShinyText>
+          </div>
         </div>
       </div>
     </div>
