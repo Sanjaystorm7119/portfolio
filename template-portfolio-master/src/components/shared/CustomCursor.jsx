@@ -91,9 +91,11 @@ const CustomCursor = () => {
     return null; // Do not render the custom cursor on mobile devices
   }
 
+  // Only spin if not on footer link
+  const isFooter = cursorClass === "footer-link-cursor";
   return (
     <div
-      className={`custom-cursor spinning-cursor ${cursorClass}${
+      className={`custom-cursor${!isFooter ? " spinning-cursor" : ""} ${cursorClass}${
         isHighlight ? " highlight-cursor" : ""
       }`}
       style={cursorStyle}
