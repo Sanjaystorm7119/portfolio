@@ -104,18 +104,30 @@ export const TextRevealByWord = ({ text, className }) => {
               whileTap="tap"
               variants={{
                 rest: { scale: 1, y: 0, boxShadow: "none" },
-                hover: { scale: 1.18, y: -8, boxShadow: "0 4px 24px rgba(0,0,0,0.12)" },
+                hover: {
+                  scale: 1.18,
+                  y: -8,
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.12)",
+                },
                 tap: { scale: 0.95, y: 0 },
               }}
               onMouseEnter={() => {
                 setHoveredIdx(i);
-                document.querySelector('.custom-cursor')?.classList.add('magnetic-word-cursor');
+                document
+                  .querySelector(".custom-cursor")
+                  ?.classList.add("magnetic-word-cursor");
               }}
               onMouseLeave={() => {
                 setHoveredIdx(null);
-                document.querySelector('.custom-cursor')?.classList.remove('magnetic-word-cursor');
+                document
+                  .querySelector(".custom-cursor")
+                  ?.classList.remove("magnetic-word-cursor");
               }}
-              style={{ cursor: "none", color: hoveredIdx === i ? "#fff" : "#aaa", transition: "color 0.2s" }}
+              style={{
+                cursor: "none",
+                color: hoveredIdx === i ? "#fff" : "#aaa",
+                transition: "color 0.2s",
+              }}
             >
               {word}
             </motion.span>
