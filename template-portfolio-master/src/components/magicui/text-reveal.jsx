@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Modal, ModalTrigger } from "../ui/animated-modal";
@@ -19,6 +19,39 @@ export const TextRevealByWord = ({ text, className }) => {
   const buttonOpacity = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
   const buttonX = useTransform(scrollYProgress, [0.8, 1], [250, 0]);
 
+  // Magnetic cursor state
+  const magneticRef = useRef(null);
+  const [magnetic, setMagnetic] = useState({ x: 0, y: 0 });
+  const [isNear, setIsNear] = useState(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!magneticRef.current) return;
+      const rect = magneticRef.current.getBoundingClientRect();
+      const mx = e.clientX;
+      const my = e.clientY;
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dist = Math.hypot(mx - cx, my - cy);
+      // Only magnetic if within 120px
+      if (dist < 120) {
+        setIsNear(true);
+        // Move max 30px toward cursor
+        const angle = Math.atan2(my - cy, mx - cx);
+        const mag = Math.min(30, 120 - dist);
+        setMagnetic({
+          x: Math.cos(angle) * mag,
+          y: Math.sin(angle) * mag,
+        });
+      } else {
+        setIsNear(false);
+        setMagnetic({ x: 0, y: 0 });
+      }
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <div
       ref={targetRef}
@@ -37,12 +70,18 @@ export const TextRevealByWord = ({ text, className }) => {
       >
         <div className="w-full flex flex-col items-center justify-center">
           <h1 className="inline-block text-6xl max-md:text-3xl">I'm</h1>
-
-          <h1
-            className={` text-9xl max-xl:text-8xl max-sm:text-7xl [color:var(--color)]`}
+          <motion.h1
+            ref={magneticRef}
+            className={`magnetic-name text-9xl max-xl:text-8xl max-sm:text-7xl [color:var(--color)]`}
+            animate={{
+              x: magnetic.x,
+              y: magnetic.y,
+              scale: isNear ? 1.05 : 1,
+            }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
             {name}
-          </h1>
+          </motion.h1>
           <h1
             className={` text-9xl max-xl:text-8xl max-sm:text-7xl [color:var(--color)]`}
           >

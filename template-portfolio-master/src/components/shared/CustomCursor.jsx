@@ -3,6 +3,7 @@ import "../../index.css"; // Ensure your CSS is imported
 
 const CustomCursor = () => {
   const [cursorClass, setCursorClass] = useState("default-cursor");
+  const [isHighlight, setIsHighlight] = useState(false);
   const [cursorStyle, setCursorStyle] = useState({});
   const [isMobile, setIsMobile] = useState(false);
 
@@ -38,7 +39,11 @@ const CustomCursor = () => {
 
     const handleMouseOver = (e) => {
       const element = e.target;
-      if (element.classList.contains("footer-link")) {
+      // Highlight when hovering over the name heading
+      if (element.classList.contains("magnetic-name")) {
+        setIsHighlight(true);
+        setCursorClass("highlight-cursor");
+      } else if (element.classList.contains("footer-link")) {
         const rect = element.getBoundingClientRect();
         setCursorStyle({
           width: `${rect.width}px`,
@@ -57,12 +62,14 @@ const CustomCursor = () => {
       } else {
         setCursorClass("default-cursor");
         setCursorStyle({});
+        setIsHighlight(false);
       }
     };
 
     const handleMouseOut = () => {
       setCursorClass("default-cursor");
       setCursorStyle({});
+      setIsHighlight(false);
     };
 
     const throttleMouseMove = (e) => {
@@ -85,7 +92,24 @@ const CustomCursor = () => {
   }
 
   return (
-    <div className={`custom-cursor ${cursorClass}`} style={cursorStyle}></div>
+    <div
+      className={`custom-cursor spinning-cursor ${cursorClass}${
+        isHighlight ? " highlight-cursor" : ""
+      }`}
+      style={cursorStyle}
+    >
+      {/* Dot in center */}
+      <div className="cursor-dot"></div>
+      {/* Highlight corners if active */}
+      {isHighlight && (
+        <>
+          <div className="cursor-corner tl"></div>
+          <div className="cursor-corner tr"></div>
+          <div className="cursor-corner bl"></div>
+          <div className="cursor-corner br"></div>
+        </>
+      )}
+    </div>
   );
 };
 
