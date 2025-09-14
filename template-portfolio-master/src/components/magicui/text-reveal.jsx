@@ -19,17 +19,16 @@ export const TextRevealByWord = ({ text, className }) => {
   const buttonOpacity = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
   const buttonX = useTransform(scrollYProgress, [0.8, 1], [250, 0]);
 
-
-
   return (
     <div
       ref={targetRef}
-      className={cn("relative z-50 min-h-[195vh] max-sm:min-h-[168vh] ", className)}
-      style={
-        {
-          "--color": theme,
-        }
-      }
+      className={cn(
+        "relative z-50 min-h-[195vh] max-sm:min-h-[168vh] ",
+        className
+      )}
+      style={{
+        "--color": theme,
+      }}
     >
       <div
         className={
@@ -37,11 +36,18 @@ export const TextRevealByWord = ({ text, className }) => {
         }
       >
         <div className="w-full flex flex-col items-center justify-center">
-          <h1 className="inline-block text-6xl max-md:text-3xl">i&apos;m</h1>
+          <h1 className="inline-block text-6xl max-md:text-3xl">I'm</h1>
 
-            <h1 className={` text-9xl max-xl:text-8xl max-sm:text-7xl [color:var(--color)]` }>
-              {name}
-            </h1>
+          <h1
+            className={` text-9xl max-xl:text-8xl max-sm:text-7xl [color:var(--color)]`}
+          >
+            {name}
+          </h1>
+          <h1
+            className={` text-9xl max-xl:text-8xl max-sm:text-7xl [color:var(--color)]`}
+          >
+            -!Just a dev
+          </h1>
         </div>
         <p
           className={

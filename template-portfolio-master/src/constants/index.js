@@ -1,8 +1,8 @@
 // Make changes here!!
 
-export const theme = "#ff00ff"; // red
+export const theme = "#ff00ff"; 
 
-export const name = "Sanjay B";
+export const name = "Sanjay B.";
 
 export const aboutMe = "Let's Build break fix Repeat ...";
 
