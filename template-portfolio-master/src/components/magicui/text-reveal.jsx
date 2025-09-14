@@ -15,6 +15,8 @@ export const TextRevealByWord = ({ text, className }) => {
     target: targetRef,
   });
   const words = text.split(" ");
+  // Track hovered word index
+  const [hoveredIdx, setHoveredIdx] = useState(null);
 
   const buttonOpacity = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
   const buttonX = useTransform(scrollYProgress, [0.8, 1], [250, 0]);
@@ -88,21 +90,37 @@ export const TextRevealByWord = ({ text, className }) => {
             -!Just a dev
           </h1>
         </div>
-        <p
+        <div
           className={
             "flex flex-wrap p-5 lg:w-[750px] text-2xl text-transparent md:p-8 sm:text-3xl md:text-3xl lg:p-10 lg:text-4xl xl:text-5xl"
           }
         >
-          {words.map((word, i) => {
-            const start = i / words.length;
-            const end = start + 1 / words.length;
-            return (
-              <Word key={i} progress={scrollYProgress} range={[start, end]}>
-                {word}
-              </Word>
-            );
-          })}
-        </p>
+          {words.map((word, i) => (
+            <motion.span
+              key={i}
+              className="relative mx-1 lg:mx-2.5 magnetic-word"
+              initial="rest"
+              animate={hoveredIdx === i ? "hover" : "rest"}
+              whileTap="tap"
+              variants={{
+                rest: { scale: 1, y: 0, boxShadow: "none" },
+                hover: { scale: 1.18, y: -8, boxShadow: "0 4px 24px rgba(0,0,0,0.12)" },
+                tap: { scale: 0.95, y: 0 },
+              }}
+              onMouseEnter={() => {
+                setHoveredIdx(i);
+                document.querySelector('.custom-cursor')?.classList.add('magnetic-word-cursor');
+              }}
+              onMouseLeave={() => {
+                setHoveredIdx(null);
+                document.querySelector('.custom-cursor')?.classList.remove('magnetic-word-cursor');
+              }}
+              style={{ cursor: "none", color: hoveredIdx === i ? "#fff" : "#aaa", transition: "color 0.2s" }}
+            >
+              {word}
+            </motion.span>
+          ))}
+        </div>
         <div className="flex items-center px-5 justify-start">
           <Modal>
             <motion.button

@@ -93,12 +93,13 @@ const CustomCursor = () => {
 
   // Only spin if not on footer link
   const isFooter = cursorClass === "footer-link-cursor";
+  const isWord = cursorClass === "magnetic-word-cursor";
   return (
     <div
-      className={`custom-cursor${!isFooter ? " spinning-cursor" : ""} ${cursorClass}${
-        isHighlight ? " highlight-cursor" : ""
-      }`}
-      style={cursorStyle}
+      className={`custom-cursor${
+        !isFooter && !isWord ? " spinning-cursor" : ""
+      } ${cursorClass}${isHighlight ? " highlight-cursor" : ""}`}
+      style={{ ...cursorStyle, display: isWord ? "none" : undefined }}
     >
       {/* Dot in center */}
       <div className="cursor-dot"></div>
