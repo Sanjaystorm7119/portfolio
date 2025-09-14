@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --main-theme: #E50914;
+    --main-theme: #e50914;
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -84,7 +84,9 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--main-theme); /* Color of the draggable part of the scrollbar */
+  background: var(
+    --main-theme
+  ); /* Color of the draggable part of the scrollbar */
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -127,7 +129,7 @@ body {
   border-radius: 0; /* Vertical line shape */
 }
 
-.button-cursor{
+.button-cursor {
   width: 30px;
   height: 30px;
   background: rgb(255, 255, 255, 0.8);
